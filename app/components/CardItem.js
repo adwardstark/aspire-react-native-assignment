@@ -7,7 +7,7 @@ export default function CardItem({ownerName, expiry, cvv, cardNumber}) {
     const [showHideCardDetails, setShowHideCardDetails] = useState(false)
     return (
         <View style={{margin: 20}}>
-            <TouchableOpacity style={{alignSelf: "flex-end"}} onPress={() => {
+            <TouchableOpacity style={{alignSelf: "flex-end", position: "absolute"}} onPress={() => {
                 setShowHideCardDetails(!showHideCardDetails)
             }}>
                 <View style={styles.showHideToggle}>
@@ -21,7 +21,7 @@ export default function CardItem({ownerName, expiry, cvv, cardNumber}) {
             <View style={styles.cardContainer}>
                 <Image source={images.aspireLogoWithText} style={styles.aspireLogo}/>
                 <Text style={styles.cardOwnerName}>{ownerName}</Text>
-                <View style={{flexDirection: "row", alignItems: "center"}}>
+                <View style={{flexDirection: "row", alignItems: "center", height: 50}}>
                 {
                     showHideCardDetails ? (
                         <Text style={styles.cardNumberText}>
@@ -76,8 +76,8 @@ const styles = {
         backgroundColor: colors.accent,
         padding: 10,
         borderRadius: 10,
-        position: "absolute",
         width: "100%",
+        height: 200,
         marginTop: 30
     },
     aspireLogo: {
