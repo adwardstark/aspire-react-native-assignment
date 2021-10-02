@@ -3,6 +3,7 @@ import { View, Text, SafeAreaView, ScrollView } from 'react-native'
 import AvailableBalanceItem from '../components/AvailableBalanceItem'
 import CardItem from '../components/CardItem'
 import CardOptionItems from '../components/CardOptionItems'
+import SpendingProgressItem from '../components/SpendingProgressItem'
 import ToolbarItem from '../components/ToolbarItem'
 import { colors } from '../resources/Colors'
 
@@ -20,6 +21,9 @@ export default function DebitCard() {
                         expiry="Thru: 12/20" 
                         cvv="456"
                         cardNumber="5647341124132020"/>
+                    <SpendingProgressItem progressValue={0.3} 
+                        spentAmount={345} 
+                        totalAmount={5000}/>
                     <CardOptionItems />
                     </View>
                 </ScrollView>
