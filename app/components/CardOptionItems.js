@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { View, Text, Image, TouchableOpacity, Switch } from 'react-native'
+import { routes } from '../navigation/Routes'
 import { colors } from '../resources/Colors'
 import { images } from '../resources/Images'
 
-export default function CardOptionItems() {
+export default function CardOptionItems({navigation}) {
     return (
         <View style={{
             paddingBottom: 20,
@@ -15,18 +16,22 @@ export default function CardOptionItems() {
                         icon={item.icon} 
                         title={item.title} 
                         subText={item.subTitle}
-                        isSwitchable={item.togglable}/>
+                        isSwitchable={item.togglable}
+                        onPress={
+                            item.id === 2 ? () => navigation.navigate(routes[3]) : null
+                        }
+                        />
                 ))
             }
         </View>
     )
 }
 
-const OptionItem = ({icon, title, subText, isSwitchable}) => {
+const OptionItem = ({icon, title, subText, isSwitchable, onPress}) => {
     const [isActive, setIsActive] = useState(false);
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={{flexDirection: "row"}}>
+            <TouchableOpacity style={{flexDirection: "row"}} onPress={onPress}>
                 <Image source={icon}/>
                 <View>
                     <Text style={styles.title}>{title}</Text>

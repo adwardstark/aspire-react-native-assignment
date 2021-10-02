@@ -7,7 +7,7 @@ import SpendingProgressItem from '../components/SpendingProgressItem'
 import ToolbarItem from '../components/ToolbarItem'
 import { colors } from '../resources/Colors'
 
-export default function DebitCard() {
+export default function DebitCard({navigation}) {
     return (
         <SafeAreaView style={{backgroundColor: colors.background, flexGrow: 1}}>
             <View style={styles.container}>
@@ -24,7 +24,7 @@ export default function DebitCard() {
                     <SpendingProgressItem progressValue={0.3} 
                         spentAmount={345} 
                         totalAmount={5000}/>
-                    <CardOptionItems />
+                    <CardOptionItems navigation={navigation}/>
                     </View>
                 </ScrollView>
             </View>

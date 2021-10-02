@@ -22,7 +22,7 @@ const debitCardNavigator = () => {
       );
 }
 
-const routes = [
+export const routes = [
     "Home",
     "DebitCard",
     "DebitCardScreen",
