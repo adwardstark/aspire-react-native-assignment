@@ -5,9 +5,23 @@ import { colors } from '../resources/Colors'
 export default function Empty() {
     return (
         <SafeAreaView style={{backgroundColor: colors.background, flexGrow: 1}}>
-            <View>
-                <Text>This screen is empty</Text>
+            <View style={styles.container}>
+                <Text style={styles.text}>This screen is not part of assignment</Text>
             </View>
         </SafeAreaView>
     )
+}
+
+const styles = {
+    container: {
+        flexGrow: 1,
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    text: {
+        color: colors.white,
+        fontSize: 14,
+        marginTop: 20,
+        fontFamily: 'AvenirNextLTPro-Medium'
+    }
 }
