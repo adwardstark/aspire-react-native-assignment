@@ -3,9 +3,13 @@ import { View, Text, SafeAreaView, Image, TextInput, TouchableOpacity } from 're
 import { colors } from '../resources/Colors'
 import ToolbarItem from '../components/ToolbarItem'
 import { images } from '../resources/Images'
+import { useSelector, useDispatch } from 'react-redux'
+import { setCardLimit } from '../redux/actions/limit'
 
 export default function WeeklySpendings({navigation}) {
-    const [inputAmount, setInputAmount] = useState(0);
+    const dispatch = useDispatch();
+    const spendLimit = useSelector(state => state.limit.amount);
+    const [inputAmount, setInputAmount] = useState(spendLimit);
     return (
         <SafeAreaView style={{backgroundColor: colors.background, flexGrow: 1}}>
             <View style={styles.container}>
@@ -48,7 +52,10 @@ export default function WeeklySpendings({navigation}) {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.buttonContainer}>
-                        <TouchableOpacity style={styles.button}>
+                        <TouchableOpacity style={styles.button} onPress={() => {
+                            dispatch(setCardLimit(inputAmount))
+                            navigation.goBack()
+                        }}>
                             <Text style={styles.buttonText}>Save</Text>
                         </TouchableOpacity>
                     </View>

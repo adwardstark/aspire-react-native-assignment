@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { View, Text, SafeAreaView, ScrollView } from 'react-native'
 import AvailableBalanceItem from '../components/AvailableBalanceItem'
 import CardItem from '../components/CardItem'
@@ -8,6 +8,7 @@ import ToolbarItem from '../components/ToolbarItem'
 import { colors } from '../resources/Colors'
 import { useSelector, useDispatch } from 'react-redux'
 import {getCardDetails} from '../redux/actions/card'
+import {setCardLimit} from '../redux/actions/limit'
 import LoadingItem from '../components/LoadingItem'
 
 export default function DebitCard({navigation}) {
@@ -15,6 +16,8 @@ export default function DebitCard({navigation}) {
     const card = useSelector(state => state.card.card);
     const isLoading = useSelector(state => state.card.loading);
     const error = useSelector(state => state.card.error);
+    const spendLimit = useSelector(state => state.limit.amount);
+    const [isSpendLimitActive, setSpendLimitActive] = useState(spendLimit ? true : false);
 
     useEffect(() => {
         dispatch(getCardDetails())
@@ -35,12 +38,24 @@ export default function DebitCard({navigation}) {
                                 expiry={card.expiry_date} 
                                 cvv={card.cvv_number}
                                 cardNumber={card.card_number}/>
-                            <SpendingProgressItem progressValue={0.3} 
-                                spentAmount={card.amount_spent} 
-                                totalAmount={card.spend_limit}/>
-                            <CardOptionItems onPress={(id) => {
-                                id === 2 ? navigation.navigate("WeeklySpendingScreen") : null
-                            }}/>
+                            {isSpendLimitActive ? (
+                                <SpendingProgressItem spentAmount={card.amount_spent} 
+                                totalAmount={spendLimit === 0 ? card.spend_limit : spendLimit}/>
+                            ) : null
+                            }
+                            <CardOptionItems onPress={() => {}}
+                            onToggle={(id, isToggled) => {
+                                if(id === 2 && isToggled) {
+                                    if(spendLimit === 0) {
+                                        dispatch(setCardLimit(card.spend_limit))
+                                    }
+                                    setSpendLimitActive(true)
+                                    navigation.navigate("WeeklySpendingScreen")
+                                } else {
+                                    setSpendLimitActive(false)
+                                }
+                            }}
+                            />
                         </View>
                     </ScrollView>
                 </View>

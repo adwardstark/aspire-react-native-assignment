@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity, Switch } from 'react-native'
 import { colors } from '../resources/Colors'
 import { images } from '../resources/Images'
 
-export default function CardOptionItems({onPress}) {
+export default function CardOptionItems({onPress, onToggle}) {
     return (
         <View style={{
             paddingBottom: 20,
@@ -17,6 +17,7 @@ export default function CardOptionItems({onPress}) {
                         subText={item.subTitle}
                         isSwitchable={item.togglable}
                         onPress={() => onPress(item.id)}
+                        onToggle={(isToggled) => onToggle(item.id, isToggled)}
                         />
                 ))
             }
@@ -24,7 +25,7 @@ export default function CardOptionItems({onPress}) {
     )
 }
 
-const OptionItem = ({icon, title, subText, isSwitchable, onPress}) => {
+const OptionItem = ({icon, title, subText, isSwitchable, onPress, onToggle}) => {
     const [isActive, setIsActive] = useState(false);
     return (
         <View style={styles.container}>
@@ -42,7 +43,10 @@ const OptionItem = ({icon, title, subText, isSwitchable, onPress}) => {
                         trackColor={{ false: colors.grey, true: colors.accent }}
                         thumbColor={colors.white}
                         value={isActive}
-                        onValueChange={() => setIsActive(!isActive)}
+                        onValueChange={() => {
+                            setIsActive(!isActive)
+                            onToggle(!isActive)
+                        }}
                     />
                 ) : null
             }
