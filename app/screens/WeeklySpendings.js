@@ -23,7 +23,7 @@ export default function WeeklySpendings({navigation}) {
                         <TextInput style={styles.amountText} 
                             keyboardType="numeric" 
                             placeholder="1,000"
-                            value={inputAmount}
+                            value={inputAmount.toString()}
                             onChangeText={(amount) => setInputAmount(amount)}/>
                     </View>
                     <View style={styles.divider}/>

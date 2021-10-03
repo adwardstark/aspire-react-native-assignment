@@ -24,7 +24,9 @@ export default function DebitCard({navigation}) {
                     <SpendingProgressItem progressValue={0.3} 
                         spentAmount={345} 
                         totalAmount={5000}/>
-                    <CardOptionItems navigation={navigation}/>
+                    <CardOptionItems onPress={(id) => {
+                        id === 2 ? navigation.navigate("WeeklySpendingScreen") : null
+                    }}/>
                     </View>
                 </ScrollView>
             </View>

@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { View, Text, Image, TouchableOpacity, Switch } from 'react-native'
-import { routes } from '../navigation/Routes'
 import { colors } from '../resources/Colors'
 import { images } from '../resources/Images'
 
-export default function CardOptionItems({navigation}) {
+export default function CardOptionItems({onPress}) {
     return (
         <View style={{
             paddingBottom: 20,
@@ -17,9 +16,7 @@ export default function CardOptionItems({navigation}) {
                         title={item.title} 
                         subText={item.subTitle}
                         isSwitchable={item.togglable}
-                        onPress={
-                            item.id === 2 ? () => navigation.navigate(routes[3]) : null
-                        }
+                        onPress={() => onPress(item.id)}
                         />
                 ))
             }
