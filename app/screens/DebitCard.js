@@ -13,25 +13,17 @@ import LoadingItem from '../components/LoadingItem'
 export default function DebitCard({navigation}) {
     const dispatch = useDispatch();
     const card = useSelector(state => state.card.card);
+    const isLoading = useSelector(state => state.card.loading);
+    const error = useSelector(state => state.card.error);
 
     useEffect(() => {
-        setTimeout(() => {
-            dispatch(getCardDetails({
-                owner_name: "Mark Henry",
-                card_number: "5647341124132020",
-                cvv_number: "456",
-                expiry_date: "Thru: 12/20",
-                balance_amount: "3,000",
-                amount_spent: "345",
-                spend_limit: "5000"
-            }))
-        }, 2000)
-    }, [])
+        dispatch(getCardDetails())
+    }, [dispatch])
 
     return (
         <SafeAreaView style={{backgroundColor: colors.background, flexGrow: 1}}>
-            {card === null ? <LoadingItem text={"Syncing Details"}/> : 
-            (
+            {card === null && <LoadingItem text={"Syncing Details"}/> }
+            {card !== null && !isLoading && (
                 <View style={styles.container}>
                     <ToolbarItem />
                     <Text style={styles.header}>Debit Card</Text>
@@ -53,6 +45,7 @@ export default function DebitCard({navigation}) {
                     </ScrollView>
                 </View>
             )}
+            {error && !isLoading && <Text>{error}</Text>}
         </SafeAreaView>
     )
 }
