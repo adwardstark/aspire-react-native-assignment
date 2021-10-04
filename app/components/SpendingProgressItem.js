@@ -9,7 +9,9 @@ export default function SpendingProgressItem({spentAmount, totalAmount}) {
         <View>
             <View style={styles.container}>
                 <Text style={styles.header}>Debit card spending limit</Text>
-                <Text style={styles.totalText}><Text style={styles.spentText}>${spentAmount}</Text> | ${totalAmount}</Text>
+                <Text testID="spend-limit" style={styles.totalText}>
+                    <Text testID="spent-amount" style={styles.spentText}>${spentAmount}</Text> | ${totalAmount}
+                </Text>
             </View>
             <Progress.Bar progress={progressValue} 
                 width={350} 

@@ -18,9 +18,9 @@ export default function CardItem({ownerName, expiry, cvv, cardNumber}) {
                     </Text>
                 </View>
             </TouchableOpacity>
-            <View style={styles.cardContainer}>
+            <View testID="card" style={styles.cardContainer}>
                 <Image source={images.aspireLogoWithText} style={styles.aspireLogo}/>
-                <Text style={styles.cardOwnerName}>{ownerName}</Text>
+                <Text testID="text-name" style={styles.cardOwnerName}>{ownerName}</Text>
                 <View style={{flexDirection: "row", alignItems: "center", height: 50}}>
                 {
                     showHideCardDetails ? (

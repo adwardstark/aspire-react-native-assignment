@@ -1,8 +1,7 @@
 # Aspire-React-Native-Assignment
-This repositiory contains source-code for mobile-app-coding-challenge provided by Aspire.
+This repository contains source-code for mobile-app-coding-challenge provided by Aspire.
 
 ## Getting Started
-------------------
 - Clone the repository
 - Install project-dependencies using:
     ```bash
@@ -19,7 +18,6 @@ This repositiory contains source-code for mobile-app-coding-challenge provided b
 - Voila!
 
 ## Tech-Stack
--------------
 - Expo
 - React-Navigation
 - Redux
@@ -27,18 +25,15 @@ This repositiory contains source-code for mobile-app-coding-challenge provided b
 - Javascript (Typescript was optional)
 
 ## Required Screens
--------------------
 Following is the list of screens required to complete the challenge:
 - Debit Card Screen
 - Weekly Spending Limit Screen
 
 ## Mock-API
------------
 The app uses following API for fetching data:
 https://my-json-server.typicode.com/adwardstark/demo/card-details
 
 ## Component Breakdown
-----------------------
 - **ToolbarItem**: Used across screens, supports navigation through back-arrow (togglable).
 
 - **LoadingItem**: Used to show loading animation using progress-bar, while the app loads data from API.
@@ -52,7 +47,6 @@ https://my-json-server.typicode.com/adwardstark/demo/card-details
 - **CardOptionItems**: Renders list of options that can be performed on the card.
 
 ## Project-Structure
---------------------
 - **components**: Contains all the rendered views.
 
 - **navigation**: Contains routes and bottom-tabs for navigation.
@@ -62,7 +56,13 @@ https://my-json-server.typicode.com/adwardstark/demo/card-details
 - **resources**: Contains fonts, images and color styles.
 - **screens**: Contains required screens.
 
+## Testing
+Test-cases are located in `__test__` directory, to run test-cases do:
+```bash
+yarn test
+```
+Once finished, you'll see a response like this:
+<img src="screenshots/tests.png" height=200>
+
 ## Screenshots
---------------
-</br>
-<img src="screenshots/debit-screen.png" height=400> <img src="screenshots/spending-screen.png" height=400>
+<img src="screenshots/debit-screen.png" height=300><img src="screenshots/spending-screen.png" height=300>

@@ -10,7 +10,7 @@ export default function AvailableBalanceItem({amount}) {
                 <View style={styles.currencyContainer}>
                     <Text style={styles.currencyText}>S$</Text>
                 </View>
-                <Text style={styles.amountText}>{amount}</Text>
+                <Text testID="amount" style={styles.amountText}>{amount}</Text>
             </View>
         </View>
     )

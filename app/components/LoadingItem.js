@@ -10,7 +10,7 @@ export default function LoadingItem({text}) {
                 indeterminate={true}
                 color={colors.white}
                 borderWidth={2} />
-            <Text style={styles.text}>{text}</Text>
+            <Text testID="text" style={styles.text}>{text}</Text>
         </View>
     )
 }
