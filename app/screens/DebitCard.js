@@ -1,5 +1,12 @@
 import React, {useEffect, useState} from 'react'
-import { View, Text, SafeAreaView, ScrollView } from 'react-native'
+import { 
+    View, 
+    Text, 
+    SafeAreaView, 
+    ScrollView, 
+    Platform, 
+    StatusBar 
+} from 'react-native'
 import AvailableBalanceItem from '../components/AvailableBalanceItem'
 import CardItem from '../components/CardItem'
 import CardOptionItems from '../components/CardOptionItems'
@@ -24,15 +31,15 @@ export default function DebitCard({navigation}) {
     }, [dispatch])
 
     return (
-        <SafeAreaView style={{backgroundColor: colors.background, flexGrow: 1}}>
+        <SafeAreaView style={styles.safeAreaContainer}>
             {card === null && <LoadingItem text={"Syncing Details"}/> }
             {card !== null && !isLoading && (
                 <View style={styles.container}>
-                    <ToolbarItem />
-                    <Text style={styles.header}>Debit Card</Text>
-                    <AvailableBalanceItem amount={card.balance_amount}/>
-                    <ScrollView>
+                    <ScrollView showsVerticalScrollIndicator={false}>
                         <View>
+                            <ToolbarItem />
+                            <Text style={styles.header}>Debit Card</Text>
+                            <AvailableBalanceItem amount={card.balance_amount}/>
                             <View style={styles.backgroundCard} />
                             <CardItem ownerName={card.owner_name}
                                 expiry={card.expiry_date} 
@@ -45,14 +52,16 @@ export default function DebitCard({navigation}) {
                             }
                             <CardOptionItems onPress={() => {}}
                             onToggle={(id, isToggled) => {
-                                if(id === 2 && isToggled) {
-                                    if(spendLimit === 0) {
-                                        dispatch(setCardLimit(card.spend_limit))
+                                if(id === 2) {
+                                    if(isToggled) {
+                                        if(spendLimit === 0) {
+                                            dispatch(setCardLimit(card.spend_limit))
+                                        }
+                                        setSpendLimitActive(true)
+                                        navigation.navigate("WeeklySpendingScreen")
+                                    } else {
+                                        setSpendLimitActive(false)
                                     }
-                                    setSpendLimitActive(true)
-                                    navigation.navigate("WeeklySpendingScreen")
-                                } else {
-                                    setSpendLimitActive(false)
                                 }
                             }}
                             />
@@ -66,6 +75,11 @@ export default function DebitCard({navigation}) {
 }
 
 const styles = {
+    safeAreaContainer: {
+        backgroundColor: colors.background, 
+        flexGrow: 1,
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+    },
     container: {
         height: "100%",
         width: "100%"
@@ -84,6 +98,6 @@ const styles = {
         position: "absolute",
         borderTopLeftRadius: 15,
         borderTopRightRadius: 15,
-        marginTop: 100
+        marginTop: 280
     }
 }

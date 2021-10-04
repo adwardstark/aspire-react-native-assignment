@@ -1,5 +1,14 @@
 import React, { useState } from 'react'
-import { View, Text, SafeAreaView, Image, TextInput, TouchableOpacity } from 'react-native'
+import { 
+    View, 
+    Text, 
+    SafeAreaView, 
+    Image, 
+    TextInput, 
+    TouchableOpacity, 
+    Platform, 
+    StatusBar 
+} from 'react-native'
 import { colors } from '../resources/Colors'
 import ToolbarItem from '../components/ToolbarItem'
 import { images } from '../resources/Images'
@@ -11,7 +20,7 @@ export default function WeeklySpendings({navigation}) {
     const spendLimit = useSelector(state => state.limit.amount);
     const [inputAmount, setInputAmount] = useState(spendLimit);
     return (
-        <SafeAreaView style={{backgroundColor: colors.background, flexGrow: 1}}>
+        <SafeAreaView style={styles.safeAreaContainer}>
             <View style={styles.container}>
                 <ToolbarItem isBackVisible onPress={() => navigation.goBack()}/>
                 <Text style={styles.header}>Spending limit</Text>
@@ -52,9 +61,16 @@ export default function WeeklySpendings({navigation}) {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.buttonContainer}>
-                        <TouchableOpacity style={styles.button} onPress={() => {
-                            dispatch(setCardLimit(inputAmount))
-                            navigation.goBack()
+                        <TouchableOpacity 
+                            style={[
+                                styles.button, 
+                                {backgroundColor: inputAmount > 0 ? colors.accent : colors.grey}
+                            ]}
+                            onPress={() => {
+                                if(inputAmount > 0) {
+                                    dispatch(setCardLimit(inputAmount))
+                                    navigation.goBack()
+                                }
                         }}>
                             <Text style={styles.buttonText}>Save</Text>
                         </TouchableOpacity>
@@ -66,6 +82,12 @@ export default function WeeklySpendings({navigation}) {
 }
 
 const styles = {
+    safeAreaContainer: {
+        backgroundColor: colors.background, 
+        flexGrow: 1,
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+        paddingBottom: Platform.OS === "android" ? (StatusBar.currentHeight + 20) : 0
+    },
     container: {
         height: "100%",
         width: "100%"
@@ -181,7 +203,6 @@ const styles = {
         position: 'absolute'
     },
     button: {
-        backgroundColor: colors.accent,
         padding: 15,
         alignItems: "center",
         width: "70%",

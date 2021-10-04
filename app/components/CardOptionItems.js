@@ -15,6 +15,7 @@ export default function CardOptionItems({onPress, onToggle}) {
                         icon={item.icon} 
                         title={item.title} 
                         subText={item.subTitle}
+                        isClickable={item.id === 2 || item.id === 3 && true}
                         isSwitchable={item.togglable}
                         onPress={() => onPress(item.id)}
                         onToggle={(isToggled) => onToggle(item.id, isToggled)}
@@ -25,11 +26,14 @@ export default function CardOptionItems({onPress, onToggle}) {
     )
 }
 
-const OptionItem = ({icon, title, subText, isSwitchable, onPress, onToggle}) => {
+const OptionItem = ({icon, title, subText, isClickable, isSwitchable, onPress, onToggle}) => {
     const [isActive, setIsActive] = useState(false);
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={{flexDirection: "row"}} onPress={onPress}>
+            <TouchableOpacity style={{flexDirection: "row"}} 
+                onPress={onPress}
+                disabled={isClickable}
+            >
                 <Image source={icon}/>
                 <View>
                     <Text style={styles.title}>{title}</Text>
@@ -39,7 +43,7 @@ const OptionItem = ({icon, title, subText, isSwitchable, onPress, onToggle}) => 
             {
                 isSwitchable ? (
                     <Switch
-                        style={{transform: [{ scaleX: .6 }, { scaleY: .6 }]}}
+                        style={{transform: [{ scaleX: .8 }, { scaleY: .8 }]}}
                         trackColor={{ false: colors.grey, true: colors.accent }}
                         thumbColor={colors.white}
                         value={isActive}

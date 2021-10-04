@@ -23,6 +23,7 @@ This repository contains source-code for mobile-app-coding-challenge provided by
 - Redux
 - Redux-Saga
 - Javascript (Typescript was optional)
+- Jest & React-Native-Testing-Library (For Testing)
 
 ## Required Screens
 Following is the list of screens required to complete the challenge:
@@ -62,6 +63,7 @@ Test-cases are located in `__test__` directory, to run test-cases do:
 yarn test
 ```
 Once finished, you'll see a response like this:
+</br>
 <img src="screenshots/tests.png" height=200>
 
 ## Screenshots

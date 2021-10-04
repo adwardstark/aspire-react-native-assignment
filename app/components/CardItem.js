@@ -11,36 +11,36 @@ export default function CardItem({ownerName, expiry, cvv, cardNumber}) {
                 setShowHideCardDetails(!showHideCardDetails)
             }}>
                 <View style={styles.showHideToggle}>
-                    <Image source={showHideCardDetails ? images.eyeShow : images.eyeHide} 
+                    <Image source={showHideCardDetails ? images.eyeHide : images.eyeShow} 
                         style={styles.showHideIcon}/>
                     <Text style={styles.showHideToggleText}>
-                        {showHideCardDetails ? "Show card number" : "Hide card number"}
+                        {showHideCardDetails ? "Hide card number" : "Show card number"}
                     </Text>
                 </View>
             </TouchableOpacity>
             <View testID="card" style={styles.cardContainer}>
                 <Image source={images.aspireLogoWithText} style={styles.aspireLogo}/>
                 <Text testID="text-name" style={styles.cardOwnerName}>{ownerName}</Text>
-                <View style={{flexDirection: "row", alignItems: "center", height: 50}}>
+                <View style={styles.cardNumberContainer}>
                 {
                     showHideCardDetails ? (
                         <Text style={styles.cardNumberText}>
                             {cardNumber.slice(0,4)}   {cardNumber.slice(4,8)}   {cardNumber.slice(8,12)}
                         </Text>
                     ) : (
-                        <Text style={styles.cardHiddenNumberText}>••••   ••••   ••••</Text>
+                        <Text style={styles.cardNumberText}>••••   ••••   ••••</Text>
                     )
                 }
                 <Text style={styles.cardNumberText}>{cardNumber.slice(12,16)}</Text>
                 </View>
-                <View style={{flexDirection: "row"}}>
+                <View style={styles.cardNumberContainer}>
                     <Text style={[styles.cardNumberText, {marginTop: 7}]}>{expiry}</Text>
                     <Text style={[styles.cardNumberText, {marginLeft: 30, marginTop: 7}]}>CVV:</Text>
                     {
                     showHideCardDetails ? (
                         <Text style={[styles.cardNumberText, {marginLeft: 5, marginTop: 7}]}>{cvv}</Text>
                     ) : (
-                        <Text style={[styles.cardHiddenNumberText, {marginLeft: 5, marginTop: 7}]}>****</Text>
+                        <Text style={[styles.cardNumberText, {marginLeft: 5, marginTop: 7}]}>••••</Text>
                     )
                 }
                 </View>
@@ -77,7 +77,7 @@ const styles = {
         padding: 10,
         borderRadius: 10,
         width: "100%",
-        height: 200,
+        height: 210,
         marginTop: 30
     },
     aspireLogo: {
@@ -99,15 +99,13 @@ const styles = {
         marginLeft: 12,
         marginTop: 12
     },
+    cardNumberContainer: {
+        flexDirection: "row", 
+        alignItems: "center", 
+        marginBottom: 10
+    },
     cardNumberText: {
         fontSize: 14,
-        fontFamily: 'AvenirNextLTPro-DemiBold',
-        color: colors.white,
-        marginLeft: 12,
-        marginTop: 20
-    },
-    cardHiddenNumberText: {
-        fontSize: 19,
         fontFamily: 'AvenirNextLTPro-DemiBold',
         color: colors.white,
         marginLeft: 12,
